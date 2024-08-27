@@ -1,0 +1,2421 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Deep Control Loads Backend Rest API Documentation",
+        "description": "Rest API Documentation",
+        "contact": {
+            "email": "remstroyod@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/admin/orders": {
+            "get": {
+                "tags": [
+                    "Admin: Orders"
+                ],
+                "summary": "Get All Orders Rest API",
+                "description": "Get All Orders",
+                "operationId": "admin.orders.index",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit the number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page the number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "order_id",
+                        "in": "query",
+                        "description": "Order Number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "date_from",
+                        "in": "query",
+                        "description": "Date From of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "2024-07-08"
+                        }
+                    },
+                    {
+                        "name": "date_to",
+                        "in": "query",
+                        "description": "Date To of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "2024-07-08"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/orders/{order}": {
+            "get": {
+                "tags": [
+                    "Admin: Orders"
+                ],
+                "summary": "Order Detail Rest API",
+                "description": "Order Detail",
+                "operationId": "admin.orders.show",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Admin: Orders"
+                ],
+                "summary": "Update Order Rest API",
+                "description": "Update Order",
+                "operationId": "admin.orders.update",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "description": "Order Status",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "order_id": {
+                                        "description": "Order ID",
+                                        "type": "string",
+                                        "example": "HT-456-YTR"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/orders/{order}/upload": {
+            "post": {
+                "tags": [
+                    "Admin: Orders"
+                ],
+                "summary": "Upload File Rest API",
+                "description": "Upload File Driver",
+                "operationId": "admin.orders.upload",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "Upload File",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/orders/{order}/documents": {
+            "get": {
+                "tags": [
+                    "Admin: Orders"
+                ],
+                "summary": "Get Documents Rest API",
+                "description": "Get Documents",
+                "operationId": "admin.orders.documents",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/orders/{order}/documents/{document}": {
+            "delete": {
+                "tags": [
+                    "Admin: Orders"
+                ],
+                "summary": "Delete Document Rest API",
+                "description": "Delete Document",
+                "operationId": "admin.orders.documents.destroy",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    },
+                    {
+                        "name": "document",
+                        "in": "path",
+                        "description": "ID Document",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/orders/{order}/documents/download/{document}": {
+            "get": {
+                "tags": [
+                    "Admin: Orders"
+                ],
+                "summary": "Download Document Rest API",
+                "description": "Download Document",
+                "operationId": "admin.orders.documents.download",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    },
+                    {
+                        "name": "document",
+                        "in": "path",
+                        "description": "ID Document",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/users": {
+            "get": {
+                "tags": [
+                    "Admin: Users"
+                ],
+                "summary": "Get All Users Rest API",
+                "description": "Get All Users",
+                "operationId": "admin.users.index",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit the number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page the number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admin: Users"
+                ],
+                "summary": "Store User Rest API",
+                "description": "Store User",
+                "operationId": "admin.users.store",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "User Name",
+                                        "type": "string",
+                                        "example": "Manager Name"
+                                    },
+                                    "surname": {
+                                        "description": "User SurName",
+                                        "type": "string",
+                                        "example": "Manager Surname"
+                                    },
+                                    "email": {
+                                        "description": "User Email",
+                                        "type": "string",
+                                        "example": "manager@example.com"
+                                    },
+                                    "password": {
+                                        "description": "User Password",
+                                        "type": "string",
+                                        "example": "123456"
+                                    },
+                                    "gender": {
+                                        "description": "User Gender",
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "status": {
+                                        "description": "User Status",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "role": {
+                                        "description": "User Role",
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "users": {
+                                        "description": "Users Attach Manager",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/users/{user}": {
+            "put": {
+                "tags": [
+                    "Admin: Users"
+                ],
+                "summary": "Update User Rest API",
+                "description": "Update User",
+                "operationId": "admin.users.update",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID User",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "description": "User Status",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "role": {
+                                        "description": "User Role",
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "users": {
+                                        "description": "Users Attach Manager",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "example": [
+                                            1,
+                                            2,
+                                            3
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admin: Users"
+                ],
+                "summary": "Delete User Rest API",
+                "description": "Delete User",
+                "operationId": "admin.users.destroy",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID User",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/users/managers/all": {
+            "get": {
+                "tags": [
+                    "Admin: Users"
+                ],
+                "summary": "Get All Managers Rest API",
+                "description": "Get All Managers",
+                "operationId": "admin.users.managers.index",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit the number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page the number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/users/managers/reattach/{userFrom}/{userTo}": {
+            "post": {
+                "tags": [
+                    "Admin: Users"
+                ],
+                "summary": "Reattach Users Manager to Manager Rest API",
+                "description": "Reattach User Manager to Manager",
+                "operationId": "admin.users.managers.reattach",
+                "parameters": [
+                    {
+                        "name": "userFrom",
+                        "in": "path",
+                        "description": "ID Manager From",
+                        "required": true,
+                        "example": 1
+                    },
+                    {
+                        "name": "userTo",
+                        "in": "path",
+                        "description": "ID Manager To",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/users/managers/attach/{manager}/{user}": {
+            "post": {
+                "tags": [
+                    "Admin: Users"
+                ],
+                "summary": "Attach User to Manager Rest API",
+                "description": "Attach User to Manager",
+                "operationId": "admin.users.managers.attach",
+                "parameters": [
+                    {
+                        "name": "manager",
+                        "in": "path",
+                        "description": "ID Manager",
+                        "required": true,
+                        "example": 1
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID User",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/users/{user}/orders": {
+            "get": {
+                "tags": [
+                    "Admin: Users"
+                ],
+                "summary": "Get All Orders by Users Rest API",
+                "description": "Get All Orders by Users",
+                "operationId": "admin.users.orders",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID User",
+                        "required": true,
+                        "example": 1
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit the number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page the number of returned orders",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/app/load-data": {
+            "get": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "App Load Data Rest API",
+                "description": "App Load Data",
+                "operationId": "load-data",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Language to use in API",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "de"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/drivers": {
+            "get": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Get Drivers Rest API",
+                "description": "Get Drivers",
+                "operationId": "drivers.index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Create a New Driver Rest API",
+                "description": "Create a New Driver",
+                "operationId": "drivers.store",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "gender": {
+                                        "description": "Gender",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "first_name": {
+                                        "description": "First Name",
+                                        "type": "string",
+                                        "example": "Driver Name"
+                                    },
+                                    "surname": {
+                                        "description": "Surname",
+                                        "type": "string",
+                                        "example": "Drive Surname"
+                                    },
+                                    "phone": {
+                                        "description": "Phone",
+                                        "type": "string",
+                                        "example": "+380960000000"
+                                    },
+                                    "email": {
+                                        "description": "Email",
+                                        "type": "string",
+                                        "example": "example@hostname.com"
+                                    },
+                                    "has_license": {
+                                        "description": "License",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "languages": {
+                                        "description": "Languages",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "RU",
+                                            "BG",
+                                            "PL"
+                                        ]
+                                    },
+                                    "file": {
+                                        "description": "Upload File",
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "file_type": {
+                                        "description": "Type File",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "file_number": {
+                                        "description": "Number File",
+                                        "type": "string",
+                                        "example": "12-RT-54"
+                                    },
+                                    "file_valid_from": {
+                                        "description": "Date Valid From File",
+                                        "type": "string",
+                                        "example": "2024-06-28"
+                                    },
+                                    "file_valid_until": {
+                                        "description": "Date Valid Until File",
+                                        "type": "string",
+                                        "example": "2024-06-28"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/drivers/{driver}": {
+            "get": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Show Driver Rest API",
+                "description": "Show Driver",
+                "operationId": "drivers.show",
+                "parameters": [
+                    {
+                        "name": "driver",
+                        "in": "path",
+                        "description": "ID Driver",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Update Driver Rest API",
+                "description": "Update Driver",
+                "operationId": "drivers.update",
+                "parameters": [
+                    {
+                        "name": "driver",
+                        "in": "path",
+                        "description": "ID Driver",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "gender": {
+                                        "description": "Gender",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "first_name": {
+                                        "description": "First Name",
+                                        "type": "string",
+                                        "example": "Driver Name"
+                                    },
+                                    "surname": {
+                                        "description": "Surname",
+                                        "type": "string",
+                                        "example": "Drive Surname"
+                                    },
+                                    "phone": {
+                                        "description": "Phone",
+                                        "type": "string",
+                                        "example": "+380960000000"
+                                    },
+                                    "email": {
+                                        "description": "Email",
+                                        "type": "string",
+                                        "example": "example@hostname.com"
+                                    },
+                                    "has_license": {
+                                        "description": "License",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "languages": {
+                                        "description": "Languages",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "RU",
+                                            "BG",
+                                            "PL"
+                                        ]
+                                    },
+                                    "file": {
+                                        "description": "Upload File",
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "file_type": {
+                                        "description": "Type File",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "file_number": {
+                                        "description": "Number File",
+                                        "type": "string",
+                                        "example": "12-RT-54"
+                                    },
+                                    "file_valid_from": {
+                                        "description": "Date Valid From File",
+                                        "type": "string",
+                                        "example": "2024-06-28"
+                                    },
+                                    "file_valid_until": {
+                                        "description": "Date Valid Until File",
+                                        "type": "string",
+                                        "example": "2024-06-28"
+                                    },
+                                    "_method": {
+                                        "description": "Method (should always be PUT)",
+                                        "type": "string",
+                                        "example": "PUT"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Drivers"
+                ],
+                "summary": "Delete Driver Rest API",
+                "description": "Delete Driver",
+                "operationId": "drivers.destroy",
+                "parameters": [
+                    {
+                        "name": "driver",
+                        "in": "path",
+                        "description": "ID Driver",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get Orders Rest API",
+                "description": "Get Orders",
+                "operationId": "orders.index",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create a New Order Rest API",
+                "description": "Create a New Order",
+                "operationId": "orders.store",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "uuid": {
+                                        "description": "Uuid",
+                                        "type": "string",
+                                        "example": "4ffe6eda-8178-fcdc-9fe2-6668b76d6203"
+                                    },
+                                    "driver_id": {
+                                        "description": "ID Driver",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "assign_number_car": {
+                                        "description": "Assign Number Car",
+                                        "type": "string",
+                                        "example": "DL6665PP"
+                                    },
+                                    "assign_number_track": {
+                                        "description": "Assign Number Track",
+                                        "type": "string",
+                                        "example": "DL6668PP"
+                                    },
+                                    "date_loading": {
+                                        "description": "Date Loading",
+                                        "type": "string",
+                                        "example": "2024-07-05 10:20"
+                                    },
+                                    "date_unloading": {
+                                        "description": "Date Unloading",
+                                        "type": "string",
+                                        "example": "2024-07-05 10:20"
+                                    },
+                                    "vehicleProperties": {
+                                        "description": "Vehicle Properties",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": {
+                                            "height": "Standard",
+                                            "classification": "Plane"
+                                        }
+                                    },
+                                    "totalWeight": {
+                                        "description": "Total Weight",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": {
+                                            "value": 24005,
+                                            "unit": "KG"
+                                        }
+                                    },
+                                    "goods": {
+                                        "description": "Goods",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "description": {
+                                                    "type": "string",
+                                                    "example": "Aluminium Un-Alloyed Wire Rod 1370"
+                                                },
+                                                "weight": {
+                                                    "properties": {
+                                                        "value": {
+                                                            "type": "number",
+                                                            "example": 24005
+                                                        },
+                                                        "unit": {
+                                                            "type": "string",
+                                                            "example": "KG"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "quantity": {
+                                                    "properties": {
+                                                        "value": {
+                                                            "type": "number",
+                                                            "example": 11
+                                                        },
+                                                        "unit": {
+                                                            "type": "string",
+                                                            "example": "KLL"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "goodsTypeCode": {
+                                                    "type": "string",
+                                                    "example": "METALLE"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "milestones": {
+                                        "description": "Milestones",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "milestoneId": {
+                                                    "type": "string",
+                                                    "example": "52837842-d9e2-f38c-2d8d-6c185919699f"
+                                                },
+                                                "type": {
+                                                    "type": "string",
+                                                    "example": "ONLOADING"
+                                                },
+                                                "rta": {
+                                                    "properties": {
+                                                        "start": {
+                                                            "type": "string",
+                                                            "example": "2024-07-05T07:00:00+02:00"
+                                                        },
+                                                        "end": {
+                                                            "type": "string",
+                                                            "example": "2024-07-05T14:30:00+02:00"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "address": {
+                                                    "properties": {
+                                                        "countryCode": {
+                                                            "type": "string",
+                                                            "example": "NL"
+                                                        },
+                                                        "zipCode": {
+                                                            "type": "string",
+                                                            "example": "3089"
+                                                        },
+                                                        "city": {
+                                                            "type": "string",
+                                                            "example": "Rotterdam"
+                                                        },
+                                                        "loadingTimes": {
+                                                            "properties": {
+                                                                "onloading": {
+                                                                    "properties": {
+                                                                        "monday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "tuesday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "wednesday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "thursday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "friday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "saturday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "example": []
+                                                                        },
+                                                                        "sunday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "example": []
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "offloading": {
+                                                                    "properties": {
+                                                                        "monday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "tuesday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "wednesday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "thursday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "friday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "properties": {
+                                                                                    "from": {
+                                                                                        "type": "string",
+                                                                                        "example": "07:00"
+                                                                                    },
+                                                                                    "to": {
+                                                                                        "type": "string",
+                                                                                        "example": "14:30"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "saturday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "example": []
+                                                                        },
+                                                                        "sunday": {
+                                                                            "type": "array",
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            },
+                                                                            "example": []
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "goodsTypeCode": {
+                                                    "type": "string",
+                                                    "example": "METALLE"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "offerPrice": {
+                                        "description": "Offer Price",
+                                        "type": "integer",
+                                        "example": 400
+                                    },
+                                    "expiredDocuments": {
+                                        "description": "Expired Documents",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": []
+                                    },
+                                    "specialEquipment": {
+                                        "description": "Special Equipment",
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "identifier": {
+                                                    "type": "string",
+                                                    "example": "LOADING_FROM_SIDE"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "specialRequirements": {
+                                        "description": "Special Requirements",
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": []
+                                    },
+                                    "points": {
+                                        "description": "Points",
+                                        "properties": {
+                                            "distances": {
+                                                "properties": {
+                                                    "totalRoadKm": {
+                                                        "type": "integer",
+                                                        "example": 329
+                                                    },
+                                                    "totalFerryKm": {
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "totalTrainKm": {
+                                                        "type": "integer",
+                                                        "example": 0
+                                                    },
+                                                    "totalSumKm": {
+                                                        "type": "integer",
+                                                        "example": 329
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "routePoints": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string",
+                                                            "example": "LOADING_POINT"
+                                                        },
+                                                        "coordinates": {
+                                                            "properties": {
+                                                                "latitude": {
+                                                                    "type": "integer",
+                                                                    "example": 51.882638959
+                                                                },
+                                                                "longitude": {
+                                                                    "type": "integer",
+                                                                    "example": 4.4193156234
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "intermediatePoints": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "properties": {
+                                                                    "latitude": {
+                                                                        "type": "integer",
+                                                                        "example": 51.882627655
+                                                                    },
+                                                                    "longitude": {
+                                                                        "type": "integer",
+                                                                        "example": 4.419309314
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "loadingPointNumber": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "milestoneId": {
+                                                            "type": "string",
+                                                            "example": "52837842-d9e2-f38c-2d8d-6c185919699f"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/{order}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Show Order Rest API",
+                "description": "Show Order",
+                "operationId": "orders.show",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Update Order Rest API",
+                "description": "Update Order",
+                "operationId": "orders.update",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "description": "Order Status",
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/{order}/upload": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Upload File Rest API",
+                "description": "Upload File Driver",
+                "operationId": "orders.upload",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "Upload File",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/{order}/documents": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get Documents Rest API",
+                "description": "Get Documents",
+                "operationId": "orders.documents",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/{order}/documents/{document}": {
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Delete Document Rest API",
+                "description": "Delete Document",
+                "operationId": "orders.documents.destroy",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    },
+                    {
+                        "name": "document",
+                        "in": "path",
+                        "description": "ID Document",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/{order}/documents/download/{document}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Download Document Rest API",
+                "description": "Download Document",
+                "operationId": "orders.documents.download",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "ID Order",
+                        "required": true,
+                        "example": 1
+                    },
+                    {
+                        "name": "document",
+                        "in": "path",
+                        "description": "ID Document",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/results": {
+            "get": {
+                "tags": [
+                    "Results"
+                ],
+                "summary": "Get Results Rest API",
+                "description": "Get Results",
+                "operationId": "results.index",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "dateStart": {
+                                        "description": "Date Start",
+                                        "type": "string",
+                                        "example": "2024-05-26"
+                                    },
+                                    "dateEnd": {
+                                        "description": "Date End",
+                                        "type": "string",
+                                        "example": "2024-05-26"
+                                    },
+                                    "countryStart": {
+                                        "description": "Country Start",
+                                        "type": "string",
+                                        "example": "GR"
+                                    },
+                                    "countryEnd": {
+                                        "description": "Country End",
+                                        "type": "string",
+                                        "example": "BG"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/results/{id}": {
+            "get": {
+                "tags": [
+                    "Results"
+                ],
+                "summary": "Get Result Offer Rest API",
+                "description": "Get Result Offer",
+                "operationId": "results.index.show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID Document",
+                        "required": true,
+                        "example": "b5380f06-7a54-f78d-aa4e-8a3b79b1c3c6"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/user/show": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User Show Rest API",
+                "description": "User Show",
+                "operationId": "user.show",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register User Rest API",
+                "description": "Register User",
+                "operationId": "auth.register",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "User Name",
+                                        "type": "string",
+                                        "example": "Name"
+                                    },
+                                    "surname": {
+                                        "description": "User Surname",
+                                        "type": "string",
+                                        "example": "Surname"
+                                    },
+                                    "email": {
+                                        "description": "User Email",
+                                        "type": "string",
+                                        "example": "admin@example.com"
+                                    },
+                                    "password": {
+                                        "description": "User Password",
+                                        "type": "string",
+                                        "example": 123456
+                                    },
+                                    "password_confirmation": {
+                                        "description": "User Password Confirmation",
+                                        "type": "string",
+                                        "example": 123456
+                                    },
+                                    "position_id": {
+                                        "description": "User Position",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "gender": {
+                                        "description": "User Gender",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "company_name": {
+                                        "description": "User Company",
+                                        "type": "string",
+                                        "example": "My Company"
+                                    },
+                                    "street": {
+                                        "description": "User Street",
+                                        "type": "string",
+                                        "example": "Street Name"
+                                    },
+                                    "post": {
+                                        "description": "User Post",
+                                        "type": "string",
+                                        "example": "65000"
+                                    },
+                                    "city": {
+                                        "description": "User City",
+                                        "type": "string",
+                                        "example": "Odessa"
+                                    },
+                                    "country_id": {
+                                        "description": "User Country",
+                                        "type": "integer",
+                                        "example": "Odessa"
+                                    },
+                                    "salutation": {
+                                        "description": "User Salutation",
+                                        "type": "string",
+                                        "example": "Salutation"
+                                    },
+                                    "phone": {
+                                        "description": "User Phone",
+                                        "type": "string",
+                                        "example": "+380960000000"
+                                    },
+                                    "confirm_docs": {
+                                        "description": "User Confirm Docs",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "subcontractors": {
+                                        "description": "User Subcontractors",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "trailers": {
+                                        "description": "User Trailers",
+                                        "type": "object",
+                                        "example": {
+                                            "1": 2,
+                                            "2": 4
+                                        },
+                                        "additionalProperties": {
+                                            "description": "The Trailer ID as key and Count as value",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "tractors": {
+                                        "description": "User Tractors",
+                                        "type": "object",
+                                        "example": {
+                                            "1": 1,
+                                            "2": 3,
+                                            "3": 6
+                                        },
+                                        "additionalProperties": {
+                                            "description": "The Tractors ID as key and Count as value",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "miscellaneous": {
+                                        "description": "User Miscellaneous",
+                                        "type": "object",
+                                        "example": {
+                                            "1": 7
+                                        },
+                                        "additionalProperties": {
+                                            "description": "The Miscellaneous ID as key and Count as value",
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/register/upload-file": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register File Upload User Rest API",
+                "description": "Register File Upload User",
+                "operationId": "auth.register.upload",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "File Passport",
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "filename": {
+                                        "description": "File Type",
+                                        "type": "string",
+                                        "example": "passport or cmr or license"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login User Rest API",
+                "description": "Login User",
+                "operationId": "auth.login",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "User Email",
+                                        "type": "string",
+                                        "example": "admin@example.com"
+                                    },
+                                    "password": {
+                                        "description": "User Password",
+                                        "type": "string",
+                                        "example": 123456
+                                    },
+                                    "remember": {
+                                        "description": "User Remember Me",
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout User Rest API",
+                "description": "Logout User",
+                "operationId": "auth.logout",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/register/check-user": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Check User Rest API",
+                "description": "Check User",
+                "operationId": "auth.register.checkuser",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "User Email",
+                                        "type": "string",
+                                        "example": "admin@example.com"
+                                    },
+                                    "password": {
+                                        "description": "User Password",
+                                        "type": "string",
+                                        "example": 123456
+                                    },
+                                    "password_confirmation": {
+                                        "description": "User Password Confirmation",
+                                        "type": "string",
+                                        "example": 123456
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/forgot-password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Forgot Password Rest API",
+                "description": "Forgot Password",
+                "operationId": "auth.forgot-password",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "User Email",
+                                        "type": "string",
+                                        "example": "admin@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/reset-password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Reset Password Rest API",
+                "description": "Reset Password",
+                "operationId": "auth.reset-password",
+                "requestBody": {
+                    "description": "Create user object",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "User Email",
+                                        "type": "string",
+                                        "example": "admin@example.com"
+                                    },
+                                    "token": {
+                                        "description": "Token",
+                                        "type": "string",
+                                        "example": "906d2c7f9247682253cfaef92e39761274e62038848d2a9088687c9896706552"
+                                    },
+                                    "password": {
+                                        "description": "Password",
+                                        "type": "string",
+                                        "example": "912345678"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "Password Confirmation",
+                                        "type": "string",
+                                        "example": "912345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Admin: Orders",
+            "description": "Admin: Orders"
+        },
+        {
+            "name": "Admin: Users",
+            "description": "Admin: Users"
+        },
+        {
+            "name": "Data",
+            "description": "Data"
+        },
+        {
+            "name": "Drivers",
+            "description": "Drivers"
+        },
+        {
+            "name": "Orders",
+            "description": "Orders"
+        },
+        {
+            "name": "Results",
+            "description": "Results"
+        },
+        {
+            "name": "User",
+            "description": "User"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "description": "A short description for security scheme",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "Bearer"
+            }
+        }
+    }
+}
